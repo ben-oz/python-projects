@@ -1,62 +1,73 @@
+# This program may not work properly if Python versionis less than  3.7
+
 TEXT_START = """
-###  This program converts decimal numbers to Roman Numerals ###
+... This program converts decimal numbers to Roman Numerals ...
 (To exit the program, please type 'exit')
 """
 TEXT_ASK_INPUT = "Please enter a number between 1 and 3999, inclusively: "
-TEXT_EXIT = "Exiting the program\n...Bye...\n" 
+TEXT_EXIT = "\nExiting the program\n...Good Bye...\n" 
+TEXT_ERROR = "Not a valid input! Please enter a decimal number between 1-3999 inclusively\n"
 
+LETTERS = {
+    1000: 'M',
+    500: 'D',
+    100: 'C',
+    50: 'L',
+    10: 'X',
+    5: 'V',
+    1: 'I'
+}
+
+SPECIAL_NUMBERS = {
+    'DCCCC': 'CM',
+    'CCCC': 'CD',
+    'LXXXX': 'XC',
+    'XXXX': 'XL',
+    'VIIII': 'IX',
+    'IIII': 'IV'
+}
+
+###########################################################################
 
 print(TEXT_START)
 
-while True:
+def converter():
     user_input = input(TEXT_ASK_INPUT)
     if user_input.lower() == "exit":
         print(TEXT_EXIT)
-        break
     
     else:
         try:
             user_input = int(user_input)
         
         except ValueError:
-            print("Not a valid input! Please Enter a decimal number\n")
+            print(TEXT_ERROR)
+            converter()
         
         else:
             if not 1 <= user_input <= 3999:
-                print("Not a valid input! Please enter a number between 1-3999 inclusively\n")
+                print(TEXT_ERROR)
+                converter()
             
             else:
-                print("..... Converting ......")
-                letters = {
-                    1000: 'M',
-                    500: 'D',
-                    100: 'C',
-                    50: 'L',
-                    10: 'X',
-                    5: 'V',
-                    1: 'I'
-                }
-                divisors = letters.keys()
-                letter_counts = []
-                in_roman = []
+                divisors = LETTERS.keys()
+                in_roman_list = []
                 remainder = user_input
+                
                 for divisor in divisors:
                     quotient = remainder // divisor
-                    letter_counts.append(quotient)
-                    [in_roman.append(letters[divisor]) for _ in range(quotient)]
+                    [in_roman_list.append(LETTERS[divisor]) for _ in range(quotient)]
                     remainder = remainder % divisor
-                in_roman_string = ''.join(in_roman)
+
+                in_roman = ''.join(in_roman_list)
                 
-                special_numbers = {
-                   'DCCCC': 'CM',
-                   'CCCC': 'CD',
-                   'LXXXX': 'XC',
-                   'XXXX': 'XL',
-                   'VIIII': 'IX',
-                   'IIII': 'IV'
-                }
-                result = ''
-                for k, v in special_numbers.items():
-                    result = in_roman_string.replace(k ,v)
-                
-                print(f"\n{user_input} in Roman Numerals is: {result}")
+                for k, v in SPECIAL_NUMBERS.items():
+                    #print("before", k, v, in_roman)
+                    in_roman = in_roman.replace(k ,v)
+                    #print("after", k,v,in_roman)
+
+                print(f"\n{user_input} in Roman Numerals is: {in_roman}\n")
+                converter()
+
+if __name__ == '__main__':
+    converter()
