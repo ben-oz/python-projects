@@ -1,6 +1,6 @@
 # Coding Challenge: Convert to Roman Numerals 
 
-Purpose of the this coding challenge is to write a program that converts the given number to the Roman numerals.
+Purpose of this coding challenge is to write a program that converts the given number to the Roman numerals.
 
 ![Roman Numerals](./roman_numerals.png)
 
