@@ -11,12 +11,11 @@ TEXT_EXIT = "\nExiting the program\n...Good Bye...\n"
 
 print(TEXT_START)
 
-while True:
+def ms_converter():
 
     user_input = input(TEXT_ASK_INPUT)
     if user_input.lower() == "exit":
         print(TEXT_EXIT)
-        break
 
     else:
         try:
@@ -24,14 +23,17 @@ while True:
         
         except ValueError:
             print(TEXT_ERROR)
+            ms_converter()
 
         else:
             if user_input < 1:
                 print(TEXT_ERROR)
+                ms_converter()
 
             elif 1 <= user_input < 1000:
                 print(f"just {user_input} millisecond/s")
-            
+                ms_converter()
+
             else:
                 seconds = user_input // 1000   # ignoring remaining milliseconds
                 
@@ -61,3 +63,7 @@ while True:
                     result += f"{item[0]} {item[1]} " if item[0] > 0 else ""
 
                 print(result)
+                ms_converter()
+
+if __name__ == '__main__':
+    ms_converter()
