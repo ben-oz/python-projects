@@ -7,15 +7,25 @@
 <body>
 <h1>My Library</h1>
 {% if arg_books %}
+<!--    <ul>-->
+<!--    {% for book in arg_books %}-->
+<!--        <li>{{ book["title"] }} - {{ book["author"] }} - My Rating: {{ book["rating"] }}/10</li>-->
+<!--    {% endfor %}-->
+<!--    </ul>-->
+    {% if arg_count == 1 %}
+        <h3>There is just one book in library</h3>
+    {% else %}
+        <h3>There are {{ arg_count }} books in library</h3>
+    {% endif %}
     <ul>
     {% for book in arg_books %}
-        <li>{{ book["title"] }} - {{ book["author"] }} - My Rating: {{ book["rating"] }}/10</li>
+        <li>{{ book.title }} - {{ book.author }} - My Rating: {{ book.rating }}</li>
     {% endfor %}
     </ul>
 {% else %}
     <ul>No books to show. Library is empty. </ul>
 {% endif %}
 
-<a href="{{ url_for('add') }}">Add New Book</a>
+<a href="{{ url_for('add_book') }}">Add New Book</a>
 </body>
 </html>
