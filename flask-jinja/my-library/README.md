@@ -10,6 +10,7 @@ The website allows to enter book names, authors and ratings to be saved . Finall
 - Make the dictionary an SQLite DB
 - Dockerize the code
 - Use plain SQL alchemy
+- Add columns to the DB and corresponding buttons to the UI for start and end dates 
 - Add a delete record button
 - Add an edit record button
 - ? maybe a button to show the book list in a specific order
